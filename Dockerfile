@@ -4,5 +4,5 @@ RUN curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.
 RUN yum -y install sbt
 RUN sbt test
 #RUN sbt "runMain example.Hello"
-RUN sbt stage
+#RUN sbt stage
 RUN target/universal/stage/bin/automated-fargate-poc
