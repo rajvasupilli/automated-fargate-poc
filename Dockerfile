@@ -5,6 +5,6 @@ RUN yum -y install sbt
 RUN sbt test
 #RUN sbt "runMain example.Hello"
 #RUN sbt stage
-RUN pwd
-RUN ls -lthr target
+RUN locate target
+RUN ls -ltrh ./target
 RUN target/universal/stage/bin/automated-fargate-poc
