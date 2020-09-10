@@ -6,5 +6,5 @@ ARG SBT_VERSION=1.3.13
 RUN sbt test
 #RUN sbt "runMain example.Hello"
 RUN sbt stage
-RUN ls -lthr
+RUN ls -lthr bin
 #RUN target/universal/stage/bin/automated-fargate-poc
