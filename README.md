@@ -13,7 +13,6 @@ This will run automated tests
 ```shell
 sbt test
 ```
-
 ## Running Locally
 This will print out a message to STDOUT.
 ```shell
