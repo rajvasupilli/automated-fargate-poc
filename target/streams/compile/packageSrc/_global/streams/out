@@ -1,0 +1,7 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /home/ec2-user/automated-fargate-poc/target/scala-2.13/automated-fargate-poc_2.13-0.1.0-SNAPSHOT-sources.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/ec2-user/automated-fargate-poc/src/main/resources/application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0m	example/Hello.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /home/ec2-user/automated-fargate-poc/src/main/scala/example/Hello.scala[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

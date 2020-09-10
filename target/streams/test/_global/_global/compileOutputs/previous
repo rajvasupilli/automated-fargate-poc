@@ -1,0 +1,1 @@
+["sbt.Task[scala.collection.Seq[java.nio.file.Path]]",["/home/ec2-user/automated-fargate-poc/target/scala-2.13/test-classes/example/HelloSpec.class","/home/ec2-user/automated-fargate-poc/target/streams/test/compileOutputs/_global/streams/inc_compile_2.13.zip"]]
