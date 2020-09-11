@@ -8,11 +8,11 @@ pipeline {
                       sbt test
                       sbt "runMain example.Hello"
                       sbt stage
-                      //target/universal/stage/bin/automated-fargate-poc
+                      #target/universal/stage/bin/automated-fargate-poc
                       '''
             }
         }
-        stage('Example Test') {
+        stage('Build,Tag and Push the Docker Image into the ECR') {
             steps {
                 echo 'Push Docker Image'
                 sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 167996500928.dkr.ecr.us-east-1.amazonaws.com
