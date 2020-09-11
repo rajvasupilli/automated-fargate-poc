@@ -1,14 +1,15 @@
 pipeline {
     agent any 
     stages {
-        stage('Example Build') {
+        stage('Build') {
             steps {
-                echo 'Hello, Maven'
+                echo 'Build steps are in progress!!!'
                 sh '''SBT_VERSION=1.3.13
                       sbt test
                       sbt "runMain example.Hello"
                       sbt stage
-                      target/universal/stage/bin/automated-fargate-poc'''
+                      //target/universal/stage/bin/automated-fargate-poc
+                      '''
             }
         }
         stage('Example Test') {
