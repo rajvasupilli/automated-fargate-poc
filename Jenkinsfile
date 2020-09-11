@@ -14,8 +14,12 @@ pipeline {
         }
         stage('Example Test') {
             steps {
-                echo 'Hello, JDK'
-                sh 'java -version'
+                echo 'Push Docker Image'
+                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 167996500928.dkr.ecr.us-east-1.amazonaws.com
+                       sudo docker build -t cronbasedfargate .
+                       sudo docker tag cronbasedfargate:latest 167996500928.dkr.ecr.us-east-1.amazonaws.com/cronbasedfargate:latest
+                       sudo docker push 167996500928.dkr.ecr.us-east-1.amazonaws.com/cronbasedfargate:latest    
+                '''
             }
         }
     }
