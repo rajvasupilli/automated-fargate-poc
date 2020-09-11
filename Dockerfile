@@ -3,7 +3,7 @@ FROM centos
 # RUN curl https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 # RUN yum -y install sbt
 # ARG SBT_VERSION=1.3.13
-ADD target /target
+ADD target target
 # RUN sbt test
 # RUN sbt "runMain example.Hello"
 # RUN sbt stage
