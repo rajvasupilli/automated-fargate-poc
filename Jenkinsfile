@@ -15,7 +15,7 @@ pipeline {
                 sh '''
                       SBT_VERSION=1.3.13
                       sbt test
-                      sbt "runMain example.Hello"
+                      #sbt "runMain example.Hello"
                       sbt stage
                    '''
             }
