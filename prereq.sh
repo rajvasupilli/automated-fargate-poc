@@ -7,6 +7,11 @@ sudo yum install -y wget
 sudo yum install -y git
 sudo yum install -y unzip
 
+# Install AWS CLI version2
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 # Install SBT
 sudo curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 sudo yum -y install sbt
