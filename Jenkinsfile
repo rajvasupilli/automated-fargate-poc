@@ -1,10 +1,19 @@
 pipeline {
     agent any 
     stages {
+        stage('Install Pre-requisites') {
+            steps {
+                echo 'Installling the prerequisites!!!'
+                sh '''
+                      bash shell.sh
+                   '''
+            }
+        }
         stage('SBT Build') {
             steps {
                 echo 'Build steps are in progress!!!'
-                sh '''SBT_VERSION=1.3.13
+                sh '''
+                      SBT_VERSION=1.3.13
                       sbt test
                       sbt "runMain example.Hello"
                       sbt stage
