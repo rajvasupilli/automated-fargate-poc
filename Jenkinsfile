@@ -6,6 +6,7 @@ pipeline {
                 echo 'Installling the prerequisites!!!'
                 sh '''
                       bash prereq.sh
+                      aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-ecs.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
