@@ -38,7 +38,7 @@ Description: Creating ECS service
 # #     Type: AWS::EC2::SecurityGroup::Id
 # #     Default: 
     
-# Resources: 
+Resources: 
 
 #   ALBSecurityGroup:
 #     Type: AWS::EC2::SecurityGroup
