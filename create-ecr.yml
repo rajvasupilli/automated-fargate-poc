@@ -1,125 +1,11 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Creating ECS service
-# Parameters:
-#   AppName:
-#     Type: String
-#     Description: Name of app requiring ALB exposure
-#     Default: ecs-app
-#   AppContainerPort:
-#     Type: Number
-#     Description: Container port of app requiring ALB exposure
-#     Default: '9000'
-#   AppHostPort:
-#     Type: Number
-#     Description: Host port of app requiring ALB exposure
-#     Default: '9000'
-#   ClusterName:
-#     Type: String
-#     Default: cluster
-#   ServiceName:
-#     Type: String
-#     Default: ecs-service
-#   EnvironmentName:
-#     Type: String
-#     Default: Scala
-#   HealthCheckGracePeriodSeconds:
-#     Type: Number
-#     Default: '30'
-#   LoadBalancerScheme:
-#     Type: String
-#     Default: 'internet-facing'
-#   VPC:
-#     Type: AWS::EC2::VPC::Id
-#     Default: vpc-02401c03ead16bd33
-#   Subnets:
-#     Type: CommaDelimitedList
-#     Default: subnet-032d10adb792688b8, subnet-08e3c3966ff990e98
-# #   SecurityGroup:
-# #     Type: AWS::EC2::SecurityGroup::Id
-# #     Default: 
     
-Resources: 
-
-#   ALBSecurityGroup:
-#     Type: AWS::EC2::SecurityGroup
-#     Properties:
-#       GroupDescription: Allow http to client host
-#       VpcId:
-#          Ref: VPC
-#       SecurityGroupIngress:
-#       - IpProtocol: tcp
-#         FromPort: 9000
-#         ToPort: 9000
-#         CidrIp: 0.0.0.0/0
-#       SecurityGroupEgress:
-#       - IpProtocol: tcp
-#         FromPort: 9000
-#         ToPort: 9000
-#         CidrIp: 0.0.0.0/0
-        
-#   TaskSecurityGroup:
-#     Type: AWS::EC2::SecurityGroup
-#     Properties:
-#       GroupDescription: Allow http to client host
-#       VpcId:
-#          Ref: VPC
-#       SecurityGroupIngress:
-#       - IpProtocol: tcp
-#         FromPort: 9000
-#         ToPort: 9000
-#         CidrIp: 0.0.0.0/0
-#       SecurityGroupEgress:
-#       - IpProtocol: tcp
-#         FromPort: 9000
-#         ToPort: 9000
-#         CidrIp: 0.0.0.0/0
-#   Role:
-#     Type: AWS::IAM::Role
-#     Properties:
-#       AssumeRolePolicyDocument:
-#         Version: 2008-10-17
-#         Statement:
-#           - Sid: ''
-#             Effect: Allow
-#             Principal:
-#               Service: ecs.amazonaws.com
-#             Action: 'sts:AssumeRole'
-#       ManagedPolicyArns:
-#         - 'arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceRole'    
-          
-#   ExecutionRole:
-#     Type: AWS::IAM::Role
-#     Properties:
-#       RoleName: !Join ['', [!Ref ServiceName, ExecutionRole]]
-#       AssumeRolePolicyDocument:
-#         Statement:
-#           - Effect: Allow
-#             Principal:
-#               Service: ecs-tasks.amazonaws.com
-#             Action: 'sts:AssumeRole'
-#       ManagedPolicyArns:
-#         - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
-        
-#   TaskRole:
-#     Type: AWS::IAM::Role
-#     Properties:
-#       RoleName: !Join ['', [!Ref ServiceName, TaskRole]]
-#       AssumeRolePolicyDocument:
-#         Statement:
-#           - Effect: Allow
-#             Principal:
-#               Service: ecs-tasks.amazonaws.com
-#             Action: 'sts:AssumeRole'
-  
-#   cluster:
-#     Type: AWS::ECS::Cluster
-#     Properties:
-#       ClusterName: !Ref ClusterName
-      
+Resources:       
   ecr: 
     Type: AWS::ECR::Repository
     Properties: 
-      RepositoryName: "scala-image-repo"
+      RepositoryName: "dev-scala-image-repo"
       RepositoryPolicyText: 
         Version: "2012-10-17"
         Statement: 
@@ -141,7 +27,7 @@ Resources:
   ecr: 
     Type: AWS::ECR::Repository
     Properties: 
-      RepositoryName: "scala-image-repo"
+      RepositoryName: "staging-scala-image-repo"
       RepositoryPolicyText: 
         Version: "2012-10-17"
         Statement: 
