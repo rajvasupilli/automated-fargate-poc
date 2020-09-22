@@ -24,10 +24,10 @@ pipeline {
         stage('ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 488070649402.dkr.ecr.us-east-1.amazonaws.com
-                       sudo docker build -t scala-image-repo .
-                       sudo docker tag scala-image-repo:latest 488070649402.dkr.ecr.us-east-1.amazonaws.com/scala-image-repo:latest
-                       sudo docker push 488070649402.dkr.ecr.us-east-1.amazonaws.com/scala-image-repo:latest    
+                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 239875208417.dkr.ecr.us-east-1.amazonaws.com
+                       sudo docker build -t dev-scala-image-repo .
+                       sudo docker tag dev-scala-image-repo:latest 239875208417.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
+                       sudo docker push 239875208417.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest    
                    '''
             }
         }
