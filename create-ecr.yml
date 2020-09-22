@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: Creating ECS service
     
 Resources:       
-  ecr: 
+  ECRA: 
     Type: AWS::ECR::Repository
     Properties: 
       RepositoryName: "dev-scala-image-repo"
@@ -14,7 +14,7 @@ Resources:
             Effect: Allow
             Principal: 
               AWS: 
-                - "arn:aws:iam::004269788592:user/cloud_user"              
+                - "arn:aws:iam::239875208417:user/cloud_user"              
             Action: 
               - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
@@ -24,7 +24,7 @@ Resources:
               - "ecr:UploadLayerPart"
               - "ecr:CompleteLayerUpload"
            
-  ecr: 
+  ECRB: 
     Type: AWS::ECR::Repository
     Properties: 
       RepositoryName: "staging-scala-image-repo"
@@ -36,7 +36,7 @@ Resources:
             Effect: Allow
             Principal: 
               AWS: 
-                - "arn:aws:iam::004269788592:user/cloud_user"              
+                - "arn:aws:iam::239875208417:user/cloud_user"              
             Action: 
               - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
