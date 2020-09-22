@@ -1,11 +1,21 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Creating ECS service
+Parameters:
+  DevECRName:
+    Type: String
+    Description: Name of the Dev ECR Repo
+    Default: dev-scala-image-repo
+  StagingECRName:
+    Type: String
+    Description: Name of the Staging ECR Repo
+    Default: staging-scala-image-repo
     
 Resources:       
   ECRA: 
     Type: AWS::ECR::Repository
     Properties: 
-      RepositoryName: "dev-scala-image-repo"
+      RepositoryName: 
+         Ref: DevECRName
       RepositoryPolicyText: 
         Version: "2012-10-17"
         Statement: 
@@ -14,7 +24,7 @@ Resources:
             Effect: Allow
             Principal: 
               AWS: 
-                - "arn:aws:iam::239875208417:user/cloud_user"              
+                Fn::Sub: - "arn:aws:iam::${AWS::AccountId}:user/cloud_user"              
             Action: 
               - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
@@ -27,7 +37,8 @@ Resources:
   ECRB: 
     Type: AWS::ECR::Repository
     Properties: 
-      RepositoryName: "staging-scala-image-repo"
+      RepositoryName:
+         Ref: StagingECRName
       RepositoryPolicyText: 
         Version: "2012-10-17"
         Statement: 
