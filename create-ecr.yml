@@ -9,10 +9,14 @@ Parameters:
     Type: String
     Description: Name of the Staging ECR Repo
     Default: staging-scala-image-repo
-  User:
+  DevIAMUser:
     Type: String
     Description: User
     Default: arn:aws:iam::740121593245:user/cloud_user
+  ProdIAMUser:
+    Type: String
+    Description: User
+    Default: arn:aws:iam::667333752349:user/pavan
   AccountID:
     Type: String
     Description: AccountID
@@ -32,7 +36,7 @@ Resources:
             Effect: Allow
             Principal: 
               AWS: 
-                Ref: User              
+                Ref: { DevIAMUser, ProdIAMUser }            
             Action: 
               - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
