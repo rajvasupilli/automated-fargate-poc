@@ -33,6 +33,28 @@ pipeline {
                    '''
             }
         }
+        
+        stage('Push image from Dev to Staging ECR') {
+            steps {
+                echo 'Build,Tag and Push the Docker Image into the ECR'
+                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 740121593245.dkr.ecr.us-east-1.amazonaws.com
+                       sudo docker pull 740121593245.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
+                       sudo docker tag dev-scala-image-repo:latest 740121593245.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest
+                       sudo docker push 740121593245.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest    
+                   '''
+            }
+        }
+        
+                stage('Push image from Stagins to Production ECR') {
+            steps {
+                echo 'Build,Tag and Push the Docker Image into the ECR'
+                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 740121593245.dkr.ecr.us-east-1.amazonaws.com
+                       sudo docker pull 740121593245.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
+                       sudo docker tag dev-scala-image-repo:latest 740121593245.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest
+                       sudo docker push 740121593245.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest    
+                   '''
+            }
+        }
        
     }
 }
