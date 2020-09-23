@@ -12,7 +12,7 @@ Parameters:
   User:
     Type: String
     Description: User
-    Default: arn:aws:iam::206406752358:user/cloud_user
+    Default: arn:aws:iam::740121593245:user/cloud_user
   AccountID:
     Type: String
     Description: AccountID
