@@ -36,7 +36,7 @@ Resources:
             Effect: Allow
             Principal: 
               AWS: 
-                Ref: { DevIAMUser, ProdIAMUser }            
+                Ref: [ DevIAMUser, ProdIAMUser ]        
             Action: 
               - "ecr:GetDownloadUrlForLayer"
               - "ecr:BatchGetImage"
