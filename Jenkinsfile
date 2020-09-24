@@ -52,7 +52,7 @@ pipeline {
         //        sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 249147895833.ecr.us-east-1.amazonaws.com
         //               sudo docker pull 249147895833.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest
         //               sudo docker tag staging-scala-image-repo:latest 667333752349.dkr.ecr.us-east-1.amazonaws.com/prod-scala-image-repo:latest
-        //               sudo docker push 667333752349.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest    
+        //               sudo docker push 667333752349.dkr.ecr.us-east-1.amazonaws.com/prod-scala-image-repo:latest    
         //           '''
         //        }    
         //    }
