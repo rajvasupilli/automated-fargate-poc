@@ -20,5 +20,5 @@ sudo yum -y install sbt
 sudo dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf repolist -v
 sudo dnf list docker-ce --showduplicates | sort -r
-sudo dnf install -y docker-ce-3:18.09.1-3.el7
+sudo dnf install -y docker-ce-3:19.03.13-3.el8
 sudo systemctl start docker
