@@ -23,7 +23,7 @@ Parameters:
     Default: 205376115077
     
 Resources:       
-  DEV-ECR: 
+  DEVECR: 
     Type: AWS::ECR::Repository
     Properties: 
       RepositoryName: 
@@ -47,7 +47,7 @@ Resources:
               - "ecr:UploadLayerPart"
               - "ecr:CompleteLayerUpload"
            
-#   STAGING-ECR: 
+#   STAGINGECR: 
 #     Type: AWS::ECR::Repository
 #     Properties: 
 #       RepositoryName:
