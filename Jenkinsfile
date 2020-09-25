@@ -6,8 +6,8 @@ pipeline {
                 echo 'Installling the prerequisites!!!'
                 sh '''
                       #bash prereq.sh
-                      aws cloudformation delete-stack --stack-name ecs-stack
-                      sleep 30
+                      #aws cloudformation delete-stack --stack-name ecs-stack
+                      #sleep 30
                       aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
