@@ -16,7 +16,7 @@ pipeline {
                       #bash prereq.sh
                       #aws cloudformation delete-stack --stack-name ecs-stack
                       #sleep 30
-                      aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-dev-ecr.yml --capabilities CAPABILITY_NAMED_IAM
+                      aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
