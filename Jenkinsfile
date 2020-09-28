@@ -1,14 +1,22 @@
 pipeline {
-    agent any 
+    agent any
+    
+    parameters {
+          text(name: 'DEV_ACCOUNT_ID', defaultValue: '406370147020', description: 'Enter the AWS Account ID of Dev Environment')
+        string(name: 'REGION', defaultValue: 'us-east-1', description: 'Enter the Region')
+        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Enter the tag pertaining to the ECR Image')
+        string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
+    }
+    
     stages {
         stage('Install Pre-requisites') {
             steps {
-                echo 'Installling the prerequisites!!!'
+                echo 'Installing the prerequisites!!!'
                 sh '''
                       #bash prereq.sh
                       #aws cloudformation delete-stack --stack-name ecs-stack
                       #sleep 30
-                      aws cloudformation update-stack --stack-name ecs-stack --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
+                      aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-dev-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
@@ -23,27 +31,27 @@ pipeline {
                    '''
             }
         }
-        stage('Build and Push into Dev ECR') {
+        stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 827659600095.dkr.ecr.us-east-1.amazonaws.com
-                       sudo docker build -t dev-scala-image-repo .
-                       sudo docker tag dev-scala-image-repo:latest 827659600095.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
-                       sudo docker push 827659600095.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest    
+                sh ''' aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                       sudo docker build -t ${params.DEV_REPO_NAME} .
+                       sudo docker tag ${params.DEV_REPO_NAME}:${params.IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG}
+                       sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG}    
                    '''
             }
         }
         
-       stage('Push image from Dev to Staging ECR') {
-            steps {
-                echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 514474256068.dkr.ecr.us-east-1.amazonaws.com
-                       sudo docker pull 514474256068.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
-                       sudo docker tag dev-scala-image-repo:latest 514474256068.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest
-                       sudo docker push 514474256068.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest    
-                   '''
-            }
-       }
+       //stage('Push image from Dev to Staging ECR') {
+       //     steps {
+       //         echo 'Build,Tag and Push the Docker Image into the ECR'
+       //         sh ''' aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin 514474256068.dkr.ecr.us-east-1.amazonaws.com
+       //                sudo docker pull 514474256068.dkr.ecr.us-east-1.amazonaws.com/dev-scala-image-repo:latest
+       //                sudo docker tag dev-scala-image-repo:latest 514474256068.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest
+       //                  sudo docker push 514474256068.dkr.ecr.us-east-1.amazonaws.com/staging-scala-image-repo:latest    
+       //            '''
+       //     }
+       //}
         
         //stage('Push image from Staging to Production ECR') {
         //    steps {
