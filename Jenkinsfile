@@ -17,9 +17,9 @@ pipeline {
                    '''
             }
         }
-        stage('Create Dev ECR') {
+        stage('Create Dev and Staging ECR') {
             steps {
-                echo 'Creating the Dev ECR!!!'
+                echo 'Dev and Staging Repository creation is underway!!!'
                 sh '''
                       aws cloudformation create-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
@@ -39,12 +39,12 @@ pipeline {
         stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh ''' aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
-                       sudo docker build -t ${params.DEV_REPO_NAME} .
-                       sudo docker tag ${params.DEV_REPO_NAME}:${params.IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG}
-                       sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG}    
+                sh ''' aws ecr get-login-password --region "${params.REGION}" | sudo docker login --username AWS --password-stdin "${params.DEV_ACCOUNT_ID}".dkr.ecr."${params.REGION}".amazonaws.com
+                       sudo docker build -t "${params.DEV_REPO_NAME}" .
+                       sudo docker tag "${params.DEV_REPO_NAME}":"${params.IMAGE_TAG}" "${params.DEV_ACCOUNT_ID}".dkr.ecr."${params.REGION}".amazonaws.com/"${params.DEV_REPO_NAME}":"${params.IMAGE_TAG}"
+                       sudo docker push "${params.DEV_ACCOUNT_ID}".dkr.ecr."${params.REGION}".amazonaws.com/"${params.DEV_REPO_NAME}":"${params.IMAGE_TAG}"    
                    '''
-            }
+               }
         }
         
        //stage('Push image from Dev to Staging ECR') {
