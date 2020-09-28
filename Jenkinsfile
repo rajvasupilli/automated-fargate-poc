@@ -13,9 +13,14 @@ pipeline {
             steps {
                 echo 'Installing the prerequisites!!!'
                 sh '''
-                      #bash prereq.sh
-                      #aws cloudformation delete-stack --stack-name dev-ecr
-                      #sleep 30
+                       bash prereq_ubuntu.sh
+                   '''
+            }
+        }
+        stage('Create Dev ECR') {
+            steps {
+                echo 'Creating the Dev ECR!!!'
+                sh '''
                       aws cloudformation create-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
