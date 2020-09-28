@@ -27,7 +27,7 @@ sudo curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E
 
 sudo apt-get update
 
-sudo apt-get install -y sbt
+sudo apt-get install -y sbt --allow-unauthenticated
 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
