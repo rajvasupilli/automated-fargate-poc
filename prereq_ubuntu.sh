@@ -33,10 +33,10 @@ sudo apt-get install -y sbt --allow-unauthenticated
 # unzip awscliv2.zip
 # sudo ./aws/install
 
-curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-unzip awscli-bundle.zip
-sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-sudo apt install awscli
+#curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+#unzip awscli-bundle.zip
+#sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+#sudo apt install awscli
 
-wget https://get.jenkins.io/war-stable/2.249.1/jenkins.war
-nohup java -jar jenkins.war &
+#wget https://get.jenkins.io/war-stable/2.249.1/jenkins.war
+#nohup java -jar jenkins.war &
