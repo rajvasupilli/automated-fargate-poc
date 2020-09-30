@@ -6,7 +6,6 @@ pipeline {
         //string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Enter the tag pertaining to the ECR Image')
         string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
     }
-    
     stages {
         stage('Checkout SCM') {
             steps {
