@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURRENT_VERSION=`cat version.sbt | awk -F ":=" '{ print $2 }' | awk -F "-" '{ print $1 }' | cut -b 3-`
+CURRENT_VERSION=`cat version.txt | awk -F ":=" '{ print $2 }' | awk -F "-" '{ print $1 }' | cut -b 3-`
 
 echo "CURRENT_VERSION:$CURRENT_VERSION"
 
@@ -44,9 +44,9 @@ if [ $? -eq 0 ];
        
       NEXTVERSION=$MAJOR.$MINOR.$PATCH-SNAPSHOT
       echo "NEXTVERSION:$NEXTVERSION"
-       > version.sbt
-      echo version := "$NEXTVERSION" > version.sbt
-      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.sbt
+       > version.txt
+      echo version := "$NEXTVERSION" > version.txt
+      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.txt
  
   elif [ `echo $VER | grep "MINOR"` ];
     then
@@ -54,25 +54,25 @@ if [ $? -eq 0 ];
       PATCH=0
       NEXTVERSION=$MAJOR.$MINOR.$PATCH-SNAPSHOT
       echo "NEXTVERSION:$NEXTVERSION"
-       > version.sbt
-      echo version := "$NEXTVERSION" > version.sbt
-      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.sbt
+       > version.txt
+      echo version := "$NEXTVERSION" > version.txt
+      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.txt
  
   elif [ `echo $VER | grep "PATCH"` ];
     then
       PATCH=`expr $PATCH + 1`
       NEXTVERSION=$MAJOR.$MINOR.$PATCH-SNAPSHOT
       echo "NEXTVERSION:$NEXTVERSION"
-       > version.sbt
-      echo version := "$NEXTVERSION" > version.sbt
-      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.sbt
+       > version.txt
+      echo version := "$NEXTVERSION" > version.txt
+      sed -i -e 's/:= /:= "/g' -e 's/SNAPSHOT/SNAPSHOT"/g' version.txt
 #       git add .
-#       git commit -m "Latest version pushed into the version.sbt and version.txt files"
+#       git commit -m "Latest version pushed into the version.txt and version.txt files"
 #       git push
   fi
  
   git add .
-  git commit -m "Latest version pushed into the file version.sbt"
+  git commit -m "Latest version pushed into the file version.txt"
   git push
 
 else
