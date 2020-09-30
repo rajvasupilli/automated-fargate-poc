@@ -64,7 +64,6 @@ pipeline {
        //                sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG}    
        //           """
        //        }
-       // }
-       
+       // }       
     }
 }
