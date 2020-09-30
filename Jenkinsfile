@@ -21,7 +21,7 @@ pipeline {
                 sh '''
                        cd automated-fargate-poc
                        bash set_version.sh
-                       export IMAGE_TAG=`cat version.txt`
+                       echo export IMAGE_TAG=`cat version.txt`
                    '''
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Dev and Staging Repository creation is underway!!!'
                 sh '''
-                      aws cloudformation create-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
+                      aws cloudformation update-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
@@ -47,7 +47,8 @@ pipeline {
         stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh """ aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                sh """ export IMAGE_TAG=`cat version.txt`
+                       aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
                        sudo docker build -t ${params.DEV_REPO_NAME} .
                        sudo docker tag ${params.DEV_REPO_NAME}:$IMAGE_TAG ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:$IMAGE_TAG
                        sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:$IMAGE_TAG   
