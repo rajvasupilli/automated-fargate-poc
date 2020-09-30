@@ -65,9 +65,12 @@ if [ `echo $VER | grep "MAJOR"` ];
       echo "NEXTVERSION:$NEXTVERSION"
        > version.txt
       echo "$NEXTVERSION" > version.txt
+#       git add .
+#       git commit -m "Latest version pushed into the version.txt and version.txt files"
+#       git push
   fi
 
-  git add .
+git add .
   git commit -m "Latest version pushed into the file version.txt"
   git push
 
