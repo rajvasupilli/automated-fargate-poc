@@ -8,10 +8,19 @@ pipeline {
     }
     
     stages {
-        stage('Install Pre-requisites') {
+        stage('Checkout SCM') {
             steps {
-                echo 'Installing the prerequisites!!!'
+                echo 'Cloning the GitHub Repo!!!'
                 sh '''
+                       git clone git@github.com:rajvasupilli/automated-fargate-poc.git                       
+                   '''
+            }
+        }
+        stage('Increment the Version') {
+            steps {
+                echo 'Bumping up the version!!!'
+                sh '''
+                       cd automated-fargate-poc
                        bash set_version.sh
                        export IMAGE_TAG=`cat version.txt`
                    '''
