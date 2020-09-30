@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURRENT_VERSION=`cat version.txt | awk -F ":=" '{ print $2 }' | awk -F "-" '{ print $1 }' | cut -b 3-`
+CURRENT_VERSION=`cat version.txt`
 
 echo "CURRENT_VERSION:$CURRENT_VERSION"
 
