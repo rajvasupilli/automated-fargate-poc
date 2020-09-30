@@ -12,7 +12,7 @@ Parameters:
   DevIAMUser:
     Type: String
     Description: User
-    Default: arn:aws:iam::406370147020:user/cloud_user
+    Default: arn:aws:iam::616987080657:user/cloud_user
   ProdIAMUser:
     Type: String
     Description: User
