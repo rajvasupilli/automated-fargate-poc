@@ -3,7 +3,7 @@ pipeline {
     parameters {
           text(name: 'DEV_ACCOUNT_ID', defaultValue: '563322280299', description: 'Enter the AWS Account ID of Dev Environment')
         string(name: 'REGION', defaultValue: 'us-east-1', description: 'Enter the Region')
-        //string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Enter the tag pertaining to the ECR Image')
+        string(name: 'IMAGE_TAG', defaultValue: '$IMAGE_TAG', description: 'Enter the tag pertaining to the ECR Image')
         string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
     }
     stages {
