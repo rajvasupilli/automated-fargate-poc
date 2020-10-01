@@ -22,7 +22,7 @@ pipeline {
                        cd automated-fargate-poc
                        bash set_version.sh
                        echo "export IMAGE_TAG=`cat version.txt`" >> ~/.bashrc
-                       source ~/.bashrc
+                         . ~/.bashrc
                        echo "IMAGE_TAG::$IMAGE_TAG"
                    '''
             }
