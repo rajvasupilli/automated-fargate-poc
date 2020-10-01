@@ -48,6 +48,7 @@ if [ `echo $VER | grep "MAJOR"` ];
       echo "NEXTVERSION:$NEXTVERSION"
        > version.txt
       echo "$NEXTVERSION" > version.txt
+      export IMAGE_TAG=$NEXTVERSION
       
   elif [ `echo $VER | grep "MINOR"` ];
     then
@@ -57,6 +58,7 @@ if [ `echo $VER | grep "MAJOR"` ];
       echo "NEXTVERSION:$NEXTVERSION"
        > version.txt
       echo "$NEXTVERSION" > version.txt
+      export IMAGE_TAG=$NEXTVERSION
 
   elif [ `echo $VER | grep "PATCH"` ];
     then
@@ -65,9 +67,10 @@ if [ `echo $VER | grep "MAJOR"` ];
       echo "NEXTVERSION:$NEXTVERSION"
        > version.txt
       echo "$NEXTVERSION" > version.txt
+      export IMAGE_TAG=$NEXTVERSION
   fi
   
-  export IMAGE_TAG=$NEXTVERSION
+  
   git add .
   git commit -m "Latest version pushed into the file version.txt"
   git push
