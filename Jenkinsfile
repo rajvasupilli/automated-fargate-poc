@@ -51,6 +51,10 @@ pipeline {
         stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
+                sh """echo "export IMAGE_TAG=`cat version.txt`" >> ~/.bashrc
+                       . ~/.bashrc
+                      echo "IMAGE_TAG::$IMAGE_TAG" 
+                   """
                 sh """ pwd
                        ls -lthr
                        aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
