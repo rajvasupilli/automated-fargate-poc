@@ -40,16 +40,16 @@ pipeline {
                       sbt test
                       #sbt "runMain example.Hello"
                       sbt stage
+                      echo "export IMAGE_TAG=`cat version.txt`" >> ~/.bashrc
+                         . ~/.bashrc
+                      echo "IMAGE_TAG::$IMAGE_TAG"
                    '''
             }
         }
         stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh """ echo "export IMAGE_TAG=`cat version.txt`" >> ~/.bashrc
-                         . ~/.bashrc
-                       echo "IMAGE_TAG::$IMAGE_TAG"
-                       aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                sh """ aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
                        sudo docker build -t ${params.DEV_REPO_NAME} .
                        sudo docker tag ${params.DEV_REPO_NAME}:$IMAGE_TAG ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:$IMAGE_TAG
                        sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:$IMAGE_TAG   
