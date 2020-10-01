@@ -22,6 +22,7 @@ pipeline {
                        cd automated-fargate-poc
                        bash set_version.sh
                        export IMAGE_TAG=`cat version.txt`
+                       echo "IMAGE_TAG:::$IMAGE_TAG"
                    '''
             }
         }
