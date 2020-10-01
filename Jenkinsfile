@@ -55,6 +55,7 @@ pipeline {
                        . ~/.bashrc
                       echo "IMAGE_TAG::$IMAGE_TAG" 
                    """
+                
                 sh """ pwd
                        ls -lthr
                        aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
