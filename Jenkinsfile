@@ -29,7 +29,7 @@ pipeline {
             steps {
                 echo 'Dev and Staging Repository creation is underway!!!'
                 sh '''
-                      aws cloudformation update-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
+                      aws cloudformation create-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
