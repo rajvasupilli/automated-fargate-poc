@@ -1,6 +1,5 @@
 pipeline {
     agent any    
-    
     parameters {
           text(name: 'DEV_ACCOUNT_ID', defaultValue: '563322280299', description: 'Enter the AWS Account ID of Dev Environment')
         string(name: 'REGION', defaultValue: 'us-east-1', description: 'Enter the Region')
