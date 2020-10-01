@@ -40,6 +40,8 @@ pipeline {
                       sbt test
                       #sbt "runMain example.Hello"
                       sbt stage
+                      pwd
+                      ls -lthr                  
                       echo "export IMAGE_TAG=`cat version.txt`" >> ~/.bashrc
                          . ~/.bashrc
                       echo "IMAGE_TAG::$IMAGE_TAG"
