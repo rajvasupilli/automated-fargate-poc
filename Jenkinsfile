@@ -22,6 +22,7 @@ pipeline {
                 sh '''
                        cd automated-fargate-poc
                        bash set_version.sh
+                       echo "version in version.txt:`cat version.txt"
                    '''
             }
         }
@@ -40,7 +41,8 @@ pipeline {
                       SBT_VERSION=1.3.13
                       sbt test
                       #sbt "runMain example.Hello"
-                      sbt stage                
+                      sbt stage 
+                      echo "version in version.txt:`cat version.txt"
                    '''
             }
         }
