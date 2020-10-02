@@ -47,8 +47,7 @@ pipeline {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
              
-                sh """ echo 'IMAGE_TAG is $IMAGE_TAG'
-                       aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                sh """ aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
                        sudo docker build -t ${params.DEV_REPO_NAME}:`cat version.txt` .
                        #sudo docker tag ${params.DEV_REPO_NAME}:${env.IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
                        #sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
