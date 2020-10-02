@@ -7,11 +7,19 @@ pipeline {
         string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
     }
     stages {
+       stage('Checkout SCM') {
+            steps {
+                echo 'Cloning the GitHub Repo!!!'
+                sh '''
+                       git clone git@github.com:rajvasupilli/automated-fargate-poc.git                       
+                   '''
+            }
+        }
        stage('Increment the Version') {
             steps {
                 echo 'Bumping up the version!!!'                
                 sh '''
-                       #cd automated-fargate-poc
+                       cd automated-fargate-poc
                        bash set_version.sh
                        IMAGE_TAG11=`cat version.txt`
                        echo "IMAGE_TAG: $IMAGE_TAG"
@@ -39,13 +47,12 @@ pipeline {
                    '''
             }
         }
-         stage('Checkout SCM') {
+         stage('Git Pull') {
             steps {
                 echo 'Cloning the GitHub Repo!!!'
                 sh '''
-                       cd ../
-                       rm -rf automated-fargate-poc
-                       git clone git@github.com:rajvasupilli/automated-fargate-poc.git                       
+                      rm -rf version.txt   
+                      git pull
                    '''
             }
         }
