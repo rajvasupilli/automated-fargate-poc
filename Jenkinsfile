@@ -53,9 +53,10 @@ pipeline {
         
         stage('Set the Image Tag') {
             steps {
-                echo 'Cloning the GitHub Repo!!!'
-                sh 'cd automated-fargate-poc'
-                IMAGE_TAG = sh (script: 'cat version.txt',returnStdout: true)                   
+               script { 
+                 cd automated-fargate-poc
+                 IMAGE_TAG = sh (script: 'cat version.txt',returnStdout: true) 
+               }    
             }
         }
         
