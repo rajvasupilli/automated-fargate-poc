@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Dev and Staging Repository creation is underway!!!'
                 sh '''
-                      aws cloudformation create-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
+                      aws cloudformation update-stack --stack-name dev-ecr --template-body file://create-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
             }
         }
@@ -46,7 +46,10 @@ pipeline {
         stage('Build and Push Image into Dev ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh '''git pull'''
+                sh '''
+                      git clone git@github.com:rajvasupilli/automated-fargate-poc.git
+                      cd automated-fargate-poc                      
+                   '''
                 sh """ 
                        aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
                        sudo docker build -t ${params.DEV_REPO_NAME}:`cat version.txt` .
