@@ -2,7 +2,7 @@ pipeline {
     agent any 
     
     parameters {
-          text(name: 'DEV_ACCOUNT_ID', defaultValue: '041007482309', description: 'Enter the AWS Account ID of Dev Environment')
+          text(name: 'DEV_ACCOUNT_ID', defaultValue: '097425282359', description: 'Enter the AWS Account ID of Dev Environment')
         string(name: 'REGION', defaultValue: 'us-east-1', description: 'Enter the Region')
         //string(name: 'IMAGE_TAG', defaultValue: '$IMAGE_TAG', description: 'Enter the tag pertaining to the ECR Image')
         string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
@@ -22,11 +22,9 @@ pipeline {
                 sh '''
                        cd automated-fargate-poc
                        bash set_version.sh
-                       IMAGE_TAG=`cat version.txt`
-                       echo "IMAGE_TAG1: $IMAGE_TAG"
-                       sudo chmod 755 version.txt
-                       IMAGE_TAG = readFile('version.txt').trim()
-                       echo "IMAGE_TAG2: $IMAGE_TAG"
+                       IMAGE_TAG11=`cat version.txt`
+                       IMAGE_TAG = readFile('version.txt')
+                       echo "IMAGE_TAG: $IMAGE_TAG"
                 '''  
                 script {                       
                        echo "IMAGE_TAG value is: $IMAGE_TAG"
