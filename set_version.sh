@@ -68,11 +68,11 @@ if [ `echo $VER | grep "MAJOR"` ];
        > version.txt
       echo "$NEXTVERSION" > version.txt
       export IMAGE_TAG=$NEXTVERSION
-  fi
-  
+  fi  
   
   git add .
   git commit -m "Latest version pushed into the file version.txt"
+  git pull
   git push
 
 else
