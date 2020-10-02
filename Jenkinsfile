@@ -64,22 +64,14 @@ pipeline {
               script {
                    def IMAGE_TAG = readFile(file: 'version.txt')
                    println(IMAGE_TAG)
+                   aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                   sudo docker build -t ${params.DEV_REPO_NAME}:$IMAGE_TAG .
                }          
-               sh 'echo "IMAGE_TAG is:::: $IMAGE_TAG"'
+           
             }
         }
         
-        stage('Build and Push Image into Dev ECR') {
-            steps {
-                echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh """ 
-                       aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
-                       sudo docker build -t ${params.DEV_REPO_NAME}:$IMAGE_TAG .
-                       #sudo docker tag ${params.DEV_REPO_NAME}:`cat version.txt` ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:`cat version.txt`
-                       #sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:`cat version.txt`
-                   """
-               }
-        }
+       
         
        //stage('Build and Push Image into Dev ECR') {
        //     steps {
