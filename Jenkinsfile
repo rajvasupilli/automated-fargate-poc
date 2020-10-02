@@ -39,17 +39,7 @@ pipeline {
                    '''
             }
         }
-         stage('Git Pull') {
-            steps {
-                echo 'Cloning the GitHub Repo!!!'
-                sh '''
-                      rm -rf version.txt
-                      git branch --set-upstream master origin/master
-                      git pull origin master
-                   '''
-            }
-        }
-        
+                 
         stage('Set the Image Tag') {
             steps {
               sh 'cd automated-fargate-poc'
