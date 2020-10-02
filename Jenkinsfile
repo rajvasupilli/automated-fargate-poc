@@ -63,7 +63,9 @@ pipeline {
                script { 
                  cd automated-fargate-poc
                  IMAGE_TAG = sh (script: 'cat version.txt',returnStdout: true) 
-               }    
+               } 
+               
+                sh 'echo "IMAGE_TAG is:::: $IMAGE_TAG"'
             }
         }
         
