@@ -60,9 +60,9 @@ pipeline {
                   ls -lthr
                  '''
                    sh """
-                      cd automated-fargate-poc
+                      
                       aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
-                      sudo docker build -t ${params.DEV_REPO_NAME}:${IMAGE_TAG}  .
+                      sudo docker build -t ${params.DEV_REPO_NAME}:${IMAGE_TAG} automated-fargate-poc
                       sudo docker tag ${params.DEV_REPO_NAME}:${IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${IMAGE_TAG}
                       sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${IMAGE_TAG}
                    """
