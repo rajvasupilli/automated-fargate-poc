@@ -24,7 +24,7 @@ pipeline {
                        bash set_version.sh
                        IMAGE_TAG=`cat version.txt`
                        echo "IMAGE_TAG1: $IMAGE_TAG"
-                       IMAGE_TAG = readFile('version.txt').trim()
+                       IMAGE_TAG = readFile\('version.txt'\).trim()
                        echo "IMAGE_TAG2: $IMAGE_TAG"
                 '''  
                 script {                       
