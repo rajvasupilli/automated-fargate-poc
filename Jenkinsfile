@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Bumping up the version!!!'                
                 sh '''
-                       cd automated-fargate-poc
+                       #cd automated-fargate-poc
                        bash set_version.sh
                        IMAGE_TAG11=`cat version.txt`
                        (script: "cat version.txt", returnStdout: true)
