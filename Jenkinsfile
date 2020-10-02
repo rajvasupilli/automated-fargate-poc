@@ -14,7 +14,6 @@ pipeline {
                        #cd automated-fargate-poc
                        bash set_version.sh
                        IMAGE_TAG11=`cat version.txt`
-                       (script: "cat version.txt", returnStdout: true)
                        echo "IMAGE_TAG: $IMAGE_TAG"
                 '''            
             }
