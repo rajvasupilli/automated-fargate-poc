@@ -21,7 +21,7 @@ pipeline {
                 sh '''
                        cd automated-fargate-poc
                        bash set_version.sh
-                       IMAGE_TAG11=`cat version.txt`
+                       IMAGE_TAG=`cat version.txt`
                        echo "IMAGE_TAG: $IMAGE_TAG"
                 '''            
             }
@@ -51,7 +51,8 @@ pipeline {
             steps {
                 echo 'Cloning the GitHub Repo!!!'
                 sh '''
-                      rm -rf version.txt   
+                      rm -rf version.txt
+                      git branch --set-upstream master origin/master
                       git pull
                    '''
             }
