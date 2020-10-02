@@ -53,7 +53,7 @@ pipeline {
                 sh '''
                       rm -rf version.txt
                       git branch --set-upstream master origin/master
-                      git pull
+                      git pull origin master
                    '''
             }
         }
