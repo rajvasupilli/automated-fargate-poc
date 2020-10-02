@@ -1,7 +1,7 @@
 pipeline {
     agent any    
     parameters {
-          text(name: 'DEV_ACCOUNT_ID', defaultValue: '563322280299', description: 'Enter the AWS Account ID of Dev Environment')
+          text(name: 'DEV_ACCOUNT_ID', defaultValue: '041007482309', description: 'Enter the AWS Account ID of Dev Environment')
         string(name: 'REGION', defaultValue: 'us-east-1', description: 'Enter the Region')
         //string(name: 'IMAGE_TAG', defaultValue: '$IMAGE_TAG', description: 'Enter the tag pertaining to the ECR Image')
         string(name: 'DEV_REPO_NAME', defaultValue: 'dev-scala-image-repo', description: 'Enter the AWS ECR Repo name pertaining to Dev Environment')
@@ -49,9 +49,9 @@ pipeline {
              
                 sh """ echo 'IMAGE_TAG is $IMAGE_TAG'
                        aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
-                       sudo docker build -t ${params.DEV_REPO_NAME}:${env.IMAGE_TAG} .
-                       sudo docker tag ${params.DEV_REPO_NAME}:${env.IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
-                       sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
+                       sudo docker build -t ${params.DEV_REPO_NAME}:`cat version.txt` .
+                       #sudo docker tag ${params.DEV_REPO_NAME}:${env.IMAGE_TAG} ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
+                       #sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${env.IMAGE_TAG}
                    """
                }
         }
