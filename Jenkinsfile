@@ -23,9 +23,9 @@ pipeline {
                        cd automated-fargate-poc
                        bash set_version.sh
                        echo "version in version.txt:`cat version.txt`"
-                   '''
-                IMAGE_TAG = sh(script: 'cat version.txt', returnStdout: true).trim()
-                echo "IMAGE_TAG value is: $IMAGE_TAG"
+                       IMAGE_TAG = sh(script: 'cat version.txt', returnStdout: true).trim()
+                       echo "IMAGE_TAG value is: $IMAGE_TAG"
+                   '''               
             }
         }
         stage('Create Dev and Staging ECR') {
