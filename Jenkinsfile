@@ -39,6 +39,7 @@ pipeline {
             steps {
                 echo 'Build steps are in progress!!!'
                 sh '''
+                      cd automated-fargate-poc
                       SBT_VERSION=1.3.13
                       sbt test
                       #sbt "runMain example.Hello"
