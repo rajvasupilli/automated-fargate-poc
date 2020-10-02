@@ -12,26 +12,26 @@ echo "MAJOR:$MAJOR"
 echo "MINOR:$MINOR"
 echo "PATCH:$PATCH"
 
-COMMIT_MESSAGE=`git log | head -1 | awk -F " " '{ print $2 }' | git log --format=%B -n 1 | grep -e MAJOR -e MINOR -e PATCH`
+COMMIT_MESSAGE=`git log | head -1 | awk -F " " '{ print $2 }' | git log --format=%B -n 1 | grep -e {{MAJOR}} -e {{MINOR}} -e {{PATCH}}`
 
 echo $COMMIT_MESSAGE
 
 if [ $? -eq 0 ];
  then
 
-  echo $COMMIT_MESSAGE | grep MAJOR
+  echo $COMMIT_MESSAGE | grep {{MAJOR}}
      if [ $? -eq 0 ];
       then
         VER=MAJOR
      fi
 
-  echo $COMMIT_MESSAGE | grep MINOR
+  echo $COMMIT_MESSAGE | grep {{MINOR}}
      if [ $? -eq 0 ];
       then
         VER=MINOR
      fi
 
-  echo $COMMIT_MESSAGE | grep PATCH
+  echo $COMMIT_MESSAGE | grep {{PATCH}}
      if [ $? -eq 0 ];
       then
         VER=PATCH
