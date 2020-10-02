@@ -72,7 +72,8 @@ if [ `echo $VER | grep "MAJOR"` ];
   
   git add .
   git commit -m "Latest version pushed into the file version.txt"
-  git pull
+  git branch --set-upstream master origin/master
+  git pull origin master
   git push
 
 else
