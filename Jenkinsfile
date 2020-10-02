@@ -65,8 +65,7 @@ pipeline {
                   """
                }         
            }
-        }
-        
+        }       
        
         
        //stage('Build and Push Image into Dev ECR') {
