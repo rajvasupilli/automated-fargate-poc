@@ -12,7 +12,7 @@ Parameters:
   DevIAMUser:
     Type: String
     Description: User
-    Default: arn:aws:iam::563322280299:user/cloud_user
+    Default: arn:aws:iam::041007482309:user/cloud_user
   ProdIAMUser:
     Type: String
     Description: User
@@ -20,7 +20,7 @@ Parameters:
   AccountID:
     Type: String
     Description: AccountID
-    Default: 563322280299
+    Default: 041007482309
     
 Resources:       
   DEVECR: 
