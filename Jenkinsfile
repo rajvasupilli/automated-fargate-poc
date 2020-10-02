@@ -18,14 +18,16 @@ pipeline {
         }
         stage('Increment the Version') {
             steps {
-                echo 'Bumping up the version!!!'
-                script {
-                //sh '''
+                echo 'Bumping up the version!!!'                
+                sh '''
                        cd automated-fargate-poc
                        bash set_version.sh
-                       echo "version in version.txt:`cat version.txt`"                       
-                //'''                
-                       IMAGE_TAG = sh(script: 'cat version.txt', returnStdout: true).trim()
+                       IMAGE_TAG=`cat version.txt`
+                       echo "IMAGE_TAG1: $IMAGE_TAG"
+                       IMAGE_TAG = readFile('version.txt').trim()
+                       echo "IMAGE_TAG2: $IMAGE_TAG"
+                '''  
+                script {                       
                        echo "IMAGE_TAG value is: $IMAGE_TAG"
                 }
               
