@@ -60,12 +60,12 @@ pipeline {
         
         stage('Set the Image Tag') {
             steps {
-               script { 
-                 cd automated-fargate-poc
-                 IMAGE_TAG = sh (script: 'cat version.txt',returnStdout: true) 
-               } 
-               
-                sh 'echo "IMAGE_TAG is:::: $IMAGE_TAG"'
+              sh 'cd automated-fargate-poc'
+              script {
+                   def IMAGE_TAG = readFile(file: 'version.txt')
+                   println(IMAGE_TAG)
+               }          
+               sh 'echo "IMAGE_TAG is:::: $IMAGE_TAG"'
             }
         }
         
