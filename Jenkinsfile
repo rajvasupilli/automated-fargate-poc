@@ -49,7 +49,7 @@ pipeline {
                 sh '''IMAGE_TAG=`cat version.txt`'''
                 sh """ 
                        aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
-                       sudo docker build -t ${params.DEV_REPO_NAME}:`$IMAGE_TAG` .
+                       sudo docker build -t ${params.DEV_REPO_NAME}:`cat version.txt` .
                        #sudo docker tag ${params.DEV_REPO_NAME}:`cat version.txt` ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:`cat version.txt`
                        #sudo docker push ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:`cat version.txt`
                    """
